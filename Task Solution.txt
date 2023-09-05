@@ -1,0 +1,83 @@
+1. Write a query to fetch all the records from employees table? 
+
+		select * from Employees;
+
+2. Write the query to fetch any 3 columns from locations table? 
+
+		select Location_Id,City,Country_id from locations;
+
+3. Display the structure of the jobs table? 
+
+		Desc Jobs;
+
+4. Describe Dual table? 
+
+		desc dual;
+
+5. Write a query for a BODMAS LAW?
+
+		select ((5*2)/2+7-5) from dual;
+
+6. Display salary and 30% of the salary from employees table?
+
+		select salary,salary*0.3 from employees;
+
+7. Display the salary, 30% of salary and the column name will be Hike for this derived column?
+
+		select salary,salary*0.3 as Hike from employees;
+
+8. Write a query to fetch a records from employees who's first name is lex.
+
+		select * from employees where first_name like '%lex%; 
+
+9. Write a query to fetch a records from employees table who’s salary is less than 2500.
+
+		select * from employees where salary < 2500;
+
+10. Write a query to fetch a records from employees table who’s salary is greater than 10000.
+
+		select * from employees where salary > 10000;
+
+11. Write a query to fetch a records from employees table who’s salary is less than 5000 but the
+department id should be 30.
+
+		select * from employees where salary < 5000 and department_id = 30;
+
+12. Write a query to fetch records from employees table either department 50, salary is greater
+than 5000.
+
+		select * from employees where salary > 5000 or department_id=50;
+
+13. Write a query to fetch the non value records from commission pct column?
+
+		select commisson_pct from employees where commission_pct is null;
+
+14. Write a query to fetch a record the null records from commission pct column?
+
+		select * from employees where commission_pct is null;
+
+15. Write a query to print only ‘sql’ from ‘sqldeveloper’.
+
+		select substr('sqldeveloper',1,3)from dual;
+
+16. Write a query to change all capital letters ‘sql developer’?
+
+		select upper('sql developer')from dual;
+
+17. Write a query to show how many characters available in ‘sql developer’?
+
+		select length('sql developer') from dual;
+
+18. Write a query to remove unwanted space from ‘ sql query ‘?
+
+		select ltrim(rtrim(' sql query ',' '),' ')from dual;
+
+19. Write a query to add any special characters left side. The length of the string must be 10.
+
+		select lpad('Raja',10,'$')from dual;
+
+20. In the following string ‘e' should be replaced by ‘i' and 's, should be replaced by ‘t'. The string is
+Sql developer. 
+
+		select translate(lower('Sql developer'),'es','it')from dual;
+
