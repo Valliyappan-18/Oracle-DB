@@ -1,0 +1,337 @@
+--DDL - Data Definition Language
+-- 1. Create 2.Alter 3.Truncate 4.Drop
+
+-- create table 
+create table VR_Tech(
+    Emp_id int,
+    Emp_name varchar(50),
+    Emp_Salary decimal(7,2),
+    Emp_TotalSalary number,
+    Emp_Role varchar2(100),
+    Emp_Address varchar2(250),
+    Emp_Phone int,
+    Emp_HireDate date
+);
+
+-- Alter Table - 
+-- 1.Add
+Alter table VR_Tech Add Emp_DOB Date;
+-- 2.Modify
+Alter table VR_Tech Modify Emp_Role Varchar(200);
+-- 3.Rename Column
+alter table VR_Tech Rename Column Emp_Salary to Salary;
+-- 4.4.Drop Column
+alter table VR_Tech Drop column Emp_DOB;
+
+-- Truncate Table 
+
+Truncate table VR_Tech;
+
+-- Drop Table 
+
+Drop Table VR_Tech;
+
+-- DQL- Data Query Language
+-- DRL- Data Retrival Language
+
+-- syntax: select * from table_name
+
+Select * from VR_Tech;
+
+-- Select and From are keywords
+-- * denotes all rows and columns
+-- Here, Table name VR_Tech;
+
+select Emp_id,Emp_name,Salary from VR_Tech;
+
+-- you can retrieve the specified column's 
+
+-- DML - Data Manipulation Language
+-- 1.Insert 2.Update 3.Delete 
+-- insert values
+
+insert into VR_Tech values(1,'',24000,360000,'Frontend Developer','Madurai',
+9626261708,'25-AUG-22');
+
+insert into VR_Tech(Emp_id,Emp_Name,Salary)values(2,'Valliyappan',27000);
+
+insert into VR_Tech(Emp_id,Emp_Name,Salary)values(3,'Meghana',30000);
+
+insert into VR_Tech(Emp_id,Emp_Name,Salary)values(4,'Dhanalakshmi',24000);
+
+insert into VR_Tech(Emp_id,Emp_Name,Salary)values(5,'VidhthyaShree',28000);
+
+-- update table
+
+Update VR_Tech set Emp_TotalSalary = salary * 12;
+
+Delete from VR_Tech where Emp_name is null;
+
+-- where is used filter and row level restriction;
+
+-- null is empty value 
+
+-- constraints
+-- 1.Primary key - unique value and does not allow null values
+-- 2.Unique key  - unique values are accepted 
+-- 3.Foreign key - Reference table - from master/parent table to child table
+-- 4.Default - set default values
+-- 5.Check - to check the condition while creating / inserting data's
+-- 6.Not Null - it's table constraint you can't alter the table. 
+-- Not null allow duplicate value.
+
+
+-- to check constraints
+
+select * from user_constraints;
+
+-- to view all tables 
+
+select * from user_tables;
+
+-- TCL - Transaction Control Language
+-- 1.Commit  - Permanent Save -  what you did 
+-- 2.SavePoint - Temporary Storage Space to Save - whether you are not about 
+-- update and delete the records. 
+-- 3.Rollback - rollback to previous operation.undo the changes till last commit
+
+commit;
+
+select * from VR_Tech;
+
+select Emp_id,Emp_Name,Salary,Emp_TotalSalary from VR_Tech;
+
+update VR_Tech set Emp_Hiredate = '25-AUG-22' where Emp_Hiredate is null;
+
+update VR_Tech set Emp_address = 'TamilNadu' where Emp_id = 2;
+
+update VR_Tech set Emp_address = 'Mangalore' where Emp_id = 3;
+
+update VR_Tech set Emp_address = 'AP' where Emp_id = 4;
+
+update VR_Tech set Emp_address = 'Bangalore' where Emp_id = 5;
+
+alter table VR_Tech drop column Emp_Phone;
+
+select * from VR_Tech;
+
+update VR_Tech set Emp_Role = 'System Engineer' where Emp_id = 3;
+
+update VR_Tech set Emp_Role = 'System Engineer Trainee' where Emp_role is null;
+
+savepoint sp1;
+
+delete from Vr_tech where Emp_id = 2;
+
+select * from VR_Tech;
+
+rollback to sp1;
+
+-- undo the changes
+
+
+-- Function in Oracle
+-- 1.Character Function
+--      i . Case Manipulation
+--          1.Upper, 2.lower 3.Initcap 
+--      ii. Character Manipulation
+--          1.Length, 2.Substr 3.Instr 4.Replace 5.Translate
+--          6.Reverse 7.LTrim 8.RTrim 9.Rpad 10.Lpad 11.Concat
+-- 2.Number Function
+--          1.Round(), 5.Abs()
+--          2.Trunc(), 6.Ceil()
+--          3.Mod(),   7.Floor()
+--          4.Sqrt(),  8.power()
+-- 3.Date Function
+--          1.Add_Months
+--          2.Months_Between
+--          3.Next_day
+--          4.Last_day
+-- 4.Type Conversion Function
+--          1.To_Number
+--              i . Implicit
+--              ii. Explicit
+--          2.To_Char
+--          3.To_Date
+-- 5.General Function
+--          1.NVL
+--          2.NVL2
+--          3.Null If
+--          4.Colasce
+
+-- Character Function Examples
+-- Case Manipulation
+-- Upper
+select upper('Hello Valliyappan') from dual;
+
+-- O/P - HELLO VALLIYAPPAN
+
+select lower('HELLO VALLIYAPPAN') from dual;
+
+-- O/P - hello valliyappan
+
+select initcap('hello vaLLiyapPAN') from dual;
+
+-- O/P - Hello Valliyappan
+
+-- Character Manipulation
+
+Select length('Hello')From Dual;  -- O/P - 5 ( count of alpha)
+
+-- The above Query will return Number Format
+
+select substr('Valliyappan',3,7)from dual;  -- O/P - lliyapp 
+
+select substr('Valliyappan',3) from dual;  -- 0/P - lliyappan
+
+select Translate('Valliyappan','al','XY')from dual; -- 0/P - VXYYivXppXn
+
+-- Translate is character based replacement
+
+select Replace('Valliyappan','al','XY') from dual; -- O/P - VXYliyappan
+
+-- Replace is String based replacement
+
+select Reverse('Raja')from dual; -- ajaR
+
+-- Reverse the given string 
+
+select concat('Valliyappn ','Raja') from dual; -- O/p - Valliyappan Raja
+
+-- Add two or more column's 
+
+-- Pipe line operator - this also concat method
+
+select ('valliyappan'||' '||'Raja') from dual; -- O/P - Valliyappan Raja
+
+select LTrim('00000000123000000000',0)from dual; -- 0/P - 123000000000
+
+select RTrim('000000000123000000000',0)from dual; -- O/P - 000000000123
+
+select Rpad('2400',10,'$')from dual; -- O/P - 2400$$$$$$
+
+select Lpad('2400',10,'*') from dual; -- O/P - ******2400
+
+
+-- Number Function
+-- Round()
+select round(234.4567,3),round(234.4563,3) from dual;
+
+-- O/P - 234.457 , 234.456
+
+select round(234.4567),round(234.4563) from dual;
+
+-- O/P - 234 , 234
+
+-- Trunc - Exact Value 
+select Trunc(234.4567,2),Trunc(234.4563,2)from dual;
+
+-- O/P - 234.45 , 234.45
+
+select Mod(23,4)from dual;
+-- O/P - 3
+-- Mod - remainder 
+
+select power(2,5)from dual;
+-- O/P - 32
+-- 2 base value , 5 is power value 2X2X2X2X2 = 32
+
+select Sqrt(144) from dual;
+-- O/P - 12
+
+select Abs(-18) from dual;
+-- O/P - 18 ( only positive value will return)
+
+select ceil(94.1) from dual;
+-- O/p - 95 - top value
+
+select floor(94.7) from dual;
+-- O/P - 94 
+
+
+-- Date Function
+-- Add_months
+select Add_months('29-AUG-23',12) from dual; 
+-- DateFormat , no of months to add
+-- O/p 29-08-24 it'll return only date format
+
+-- Months_Between
+select Months_Between('25-AUG-22','25-FEB-23')from dual;
+
+-- O/p - (-5.4516129032258064516129032258064516129)
+
+select Next_day (Sysdate,'Thursday')from dual;
+
+-- O/p - Sysdate - system date - today 29-08-23 
+-- O/p - 31-08-23 
+
+select Last_day('02-11-2000')from dual;
+-- O/P - 30-11-00 (it'll return date format)
+
+
+-- Type Conversion Function
+-- To_Number
+select 5+5 from dual;
+-- O/P 10
+select 5+'5' from dual; -- implicit method
+-- O/P 10
+select 5+'Five' from dual; -- we can't add number + string characters
+-- O/P - Error
+
+select 5+ to_number('6')from dual; -- explicit method
+-- O/P 11
+select 5+ to_number('Five')from dual ;
+-- O/P Error
+
+commit;
+
+-- To_Date 
+select To_Date('29/08/23','DD/MM/YY') from dual; -- Date conversion
+
+select To_Date('08/29/24','MM/DD/YY')from dual; -- Return Format DD-MM-YY;
+
+-- To_Char
+SELECT TO_CHAR(SYSDATE,'month') FROM DUAL;
+
+select to_char(sysdate,'DD')from dual;
+
+select to_Char(sysdate,'YY') from dual;
+
+-- General Function
+-- NVL - replace the null value
+-- syn: select NVL(column_name,'return value')from table_name;
+-- NVL - 2 arguments only null value replacement(data,null replacement)
+-- NVL2 - 3 arguments(data,not null replacement,null replacement)
+-- NUll If - 2 arguments(data,data)  same data means will return null value
+-- otherwise 1st argument.
+-- Colasce - to used return/display first not null value
+
+
+
+-- Multi-Row Function (n no of input = 1 output)
+
+-- Max,Min,Count,Sum,Avg 
+
+select Max(salary)from VR_Tech;
+
+select Min(Salary)From VR_Tech;
+
+select avg(salary) from VR_Tech;
+
+select sum(salary) from VR_Tech;
+
+select count(salary) from VR_Tech;
+
+select * from VR_Tech; 
+
+-- Distinct is used remove duplicates; unique value will return
+
+-- count - count all data's without null values
+-- count * - count all data's with null 
+
+
+-- Having Clause - while using Group By Clause. to Filter after group by .
+
+
+
+
